@@ -9,7 +9,7 @@ export default function Projects() {
 
   return (
     <SectionContainer id="projects">
-      <div className="py-20 md:px-10 lg:px-20">
+      <div className="md:px-10 lg:px-20">
         <div className="flex flex-col items-start mb-16">
           <span className="text-blue-600 font-mono text-sm tracking-widest mb-4">SELECTED WORKS</span>
           <h2 className="text-5xl md:text-6xl font-black tracking-tighter uppercase relative">

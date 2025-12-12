@@ -28,17 +28,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           className="object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-100"
         />
         {/* Overlay Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-80"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 md:opacity-60 transition-opacity duration-300 md:group-hover:opacity-80"></div>
       </div>
 
       {/* Content */}
       <Link href={`/works/${project.id}`} className="absolute inset-0 z-10 flex flex-col justify-end p-6 md:p-8 cursor-pointer">
-        <div className="transform transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
+        <div className="transform transition-transform duration-500 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0">
           <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">
             {project.title}
           </h3>
           
-          <div className="flex flex-wrap gap-2 mb-4 opacity-0 transform translate-y-4 transition-all duration-500 delay-75 group-hover:opacity-100 group-hover:translate-y-0">
+          <div className="flex flex-wrap gap-2 mb-4 opacity-100 md:opacity-0 translate-y-0 transform md:translate-y-4 transition-all duration-500 delay-75 md:group-hover:opacity-100 md:group-hover:translate-y-0">
             {project.techStack.map((tech) => (
               <span 
                 key={tech} 
@@ -49,7 +49,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             ))}
           </div>
 
-          <p className="text-gray-300 text-sm line-clamp-2 mb-6 opacity-0 transform translate-y-4 transition-all duration-500 delay-100 group-hover:opacity-100 group-hover:translate-y-0">
+          <p className="text-gray-300 text-sm line-clamp-2 mb-6 opacity-100 md:opacity-0 translate-y-0 transform md:translate-y-4 transition-all duration-500 delay-100 md:group-hover:opacity-100 md:group-hover:translate-y-0">
             {project.description}
           </p>
         </div>

@@ -6,7 +6,7 @@ export default function Skills() {
 
   return (
     <SectionContainer id="skills">
-      <div className="py-20 md:px-10 lg:px-20 grid md:grid-cols-[300px_1fr] gap-12">
+      <div className="md:px-10 lg:px-20 grid md:grid-cols-[300px_1fr] gap-12">
         
         {/* Header Column */}
         <div>

@@ -15,8 +15,9 @@ export default function SectionContainer({ children, className, id, noBorderBott
     <section 
       id={id} 
       className={cn(
-        "w-full bg-white dark:bg-black text-gray-900 dark:text-gray-50",
-        !noBorderBottom && "border-b border-gray-900 dark:border-gray-100"
+        "w-full max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-24",
+        !noBorderBottom && "border-b border-gray-200 dark:border-gray-800",
+        className
       )}
     >
       <motion.div 
@@ -25,7 +26,6 @@ export default function SectionContainer({ children, className, id, noBorderBott
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true, margin: "-10%" }}
         className={cn(
-          "container mx-auto border-x border-gray-900 dark:border-gray-100", 
           className
         )}
       >

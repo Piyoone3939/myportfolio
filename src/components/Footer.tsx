@@ -7,12 +7,12 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950 py-12">
-      <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="text-sm text-gray-500 dark:text-gray-400 text-center md:text-left">
+      <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-4">
+        <p className="text-sm text-gray-500 dark:text-gray-400 text-center md:text-left order-2 md:order-1">
           &copy; {currentYear} {profile.name}. All rights reserved.
         </p>
         
-        <div className="flex gap-6">
+        <div className="flex gap-6 order-1 md:order-2">
           <a 
             href={profile.contact.github} 
             target="_blank" 

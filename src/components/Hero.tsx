@@ -177,12 +177,12 @@ export default function Hero() {
           >
             <h1 className="flex flex-col font-black leading-[0.85] tracking-tighter select-none">
               <span 
-                className="text-[clamp(3rem,12vw,10rem)] text-gray-900 dark:text-white transition-colors duration-300"
+                className="text-[clamp(2rem,10vw,10rem)] text-gray-900 dark:text-white transition-colors duration-300"
               >
                 STUDENT
               </span>
               <span 
-                className="text-[clamp(3rem,12vw,10rem)] text-blue-500 relative"
+                className="text-[clamp(2rem,10vw,10rem)] text-blue-500 relative"
               >
                 ENGINEER
                 {/* Decorative Cursor */}
