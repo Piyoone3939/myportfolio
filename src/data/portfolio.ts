@@ -39,46 +39,46 @@ export const profile: Profile = {
 
 export const skills: SkillCategory[] = [
   {
-    category: "Languages",
-    items: ["TypeScript", "JavaScript", "Python", "Go", "Rust"],
+    category: "Frontend",
+    items: ["TypeScript","Next.js","React","Three.js","Tailwind CSS","Vite"],
   },
   {
-    category: "Frameworks",
-    items: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
+    category: "Backend",
+    items: ["node.js","hono","Python","Java","C","C++","C#",],
   },
   {
     category: "Tools",
-    items: ["Git", "Docker", "Figma", "VS Code"],
+    items: ["Git", "Docker", "Figma", "VS Code","Mediapipe"],
   },
 ];
 
 export const projects: Project[] = [
   {
     id: "1",
-    title: "Portfolio v1",
+    title: "Piyoone's Portfolio",
     description: "Personal portfolio website built with Next.js and Tailwind CSS. Features rich animations and responsive design.",
     techStack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
-    repoUrl: "https://github.com",
-    demoUrl: "https://vercel.com",
-    thumbnail: "/projects/project1.jpg", // Placeholder
+    repoUrl: "https://github.com/Piyoone3939/myportfolio",
+    demoUrl: "https://piyoone.com",
+    thumbnail: "/projects/portfolio.png",
   },
   {
     id: "2",
-    title: "E-Commerce App",
+    title: "Koconi",
     description: "A full-featured e-commerce application with cart functionality and payment processing integration.",
     techStack: ["React", "Redux", "Stripe", "Node.js"],
-    repoUrl: "https://github.com",
-    demoUrl: "https://vercel.com",
-    thumbnail: "/projects/project2.jpg", // Placeholder
+    repoUrl: "https://github.com/Piyoone3939/koconi",
+    demoUrl: "https://koconi.com",
+    thumbnail: "/projects/koconi.png",
   },
    {
     id: "3",
-    title: "Task Manager",
+    title: "Virtual Driving School",
     description: "Simple and intuitive task management tool helping you stay organized and focused.",
     techStack: ["Vue.js", "Firebase", "Vuetify"],
-    repoUrl: "https://github.com",
-    demoUrl: "https://vercel.com",
-    thumbnail: "/projects/project3.jpg", // Placeholder
+    repoUrl: "https://github.com/Piyoone3939/driving",
+    demoUrl: "https://drivingsupport.vercel.app",
+    thumbnail: "/projects/VirtualDrivingSchool.png",
   },
 ];
 

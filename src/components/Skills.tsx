@@ -5,7 +5,7 @@ export default function Skills() {
   const { skills } = portfolioData;
 
   return (
-    <SectionContainer id="skills">
+    <SectionContainer id="skills" className="max-w-full">
       <div className="md:px-10 lg:px-20 grid md:grid-cols-[300px_1fr] gap-12">
         
         {/* Header Column */}

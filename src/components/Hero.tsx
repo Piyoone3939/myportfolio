@@ -142,7 +142,6 @@ export default function Hero() {
         <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-6">
            {[
              { icon: Github, href: profile.contact.github },
-             { icon: Linkedin, href: "https://linkedin.com" }, // Linkedin is not in data yet
              { icon: Twitter, href: profile.contact.twitter }
            ].map((Social, index) => (
              <a 
@@ -221,8 +220,8 @@ export default function Hero() {
         {/* Bottom Stats */}
         <footer className="grid grid-cols-3 gap-4 md:gap-12 border-t border-gray-200 dark:border-gray-800 pt-8 pb-8 md:pb-0 mt-auto">
           {[
-            { label: "PROJECTS", value: "12+", color: "bg-blue-500" },
-            { label: "YEARS EXP", value: "03", color: "bg-green-500" },
+            { label: "PROJECTS", value: "5+", color: "bg-blue-500" },
+            { label: "YEARS EXP", value: "02", color: "bg-green-500" },
             { label: "PASSION", value: "∞", color: "bg-purple-500" },
           ].map((stat, i) => (
             <div key={i} className="flex flex-col gap-2">

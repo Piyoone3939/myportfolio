@@ -8,7 +8,7 @@ export default function Projects() {
   const { projects } = portfolioData;
 
   return (
-    <SectionContainer id="projects">
+    <SectionContainer id="projects" className="max-w-full">
       <div className="md:px-10 lg:px-20">
         <div className="flex flex-col items-start mb-16">
           <span className="text-blue-600 font-mono text-sm tracking-widest mb-4">SELECTED WORKS</span>
