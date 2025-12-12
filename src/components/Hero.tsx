@@ -103,7 +103,7 @@ export default function Hero() {
 
 
       {/* Main Content Layer */}
-      <div className="relative z-10 flex flex-col h-screen p-4 md:p-8">
+      <div className="relative z-10 flex flex-col min-h-screen p-4 md:p-8">
         
         {/* Top Bar */}
         <header className="flex justify-between items-start mb-8 text-xs font-mono tracking-widest text-gray-500 dark:text-gray-400">
@@ -219,7 +219,7 @@ export default function Hero() {
         </main>
 
         {/* Bottom Stats */}
-        <footer className="grid grid-cols-3 gap-4 md:gap-12 border-t border-gray-200 dark:border-gray-800 pt-8 mt-auto">
+        <footer className="grid grid-cols-3 gap-4 md:gap-12 border-t border-gray-200 dark:border-gray-800 pt-8 pb-8 md:pb-0 mt-auto">
           {[
             { label: "PROJECTS", value: "12+", color: "bg-blue-500" },
             { label: "YEARS EXP", value: "03", color: "bg-green-500" },
