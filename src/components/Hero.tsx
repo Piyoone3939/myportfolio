@@ -10,11 +10,79 @@ export default function Hero() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [currentTime, setCurrentTime] = useState<string>("");
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Canvas Effect
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let drops: number[] = [];
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const fontSize = 10;
+      const columns = Math.ceil(canvas.width / fontSize);
+      drops = new Array(columns).fill(1).map(() => Math.random() * -100); // Random start positions
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    const fontSize = 10;
+    
+    // Throttled draw for performance (30fps)
+    let lastTime = 0;
+    const fps = 30;
+    const interval = 1000 / fps;
+
+    const draw = (currentTime: number) => {
+        animationFrameId = requestAnimationFrame(draw);
+
+        if (currentTime - lastTime < interval) return;
+        lastTime = currentTime;
+
+        // Check dark mode
+        const isDark = document.documentElement.classList.contains('dark');
+        
+        // Fade effect
+        ctx.fillStyle = isDark ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = isDark ? 'rgba(50, 205, 50, 0.5)' : 'rgba(0, 0, 0, 0.2)'; // Matrix green or gray
+        ctx.font = `${fontSize}px monospace`;
+
+        for(let i = 0; i < drops.length; i++) {
+            const text = Math.random() > 0.5 ? '1' : '0';
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+            if(drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+                drops[i] = 0;
+            
+            drops[i]++;
+        }
+    };
+
+    draw(0);
+
+    return () => {
+        window.removeEventListener('resize', handleResize);
+        cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
 
   // Time & Scroll & Mouse Effect
   useEffect(() => {
     // Clock
+    setMounted(true);
     const timer = setInterval(() => {
       const now = new Date();
       setCurrentTime(now.toLocaleTimeString('en-US', { hour12: false }));
@@ -29,14 +97,21 @@ export default function Hero() {
       setScrollProgress(Number(scroll));
     };
 
-    // Mouse Move
+    // Mouse Move (Throttled using simple flag or requestAnimationFrame could be better, but react state is the bottleneck)
+    let ticking = false;
     const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        setMousePos({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (containerRef.current) {
+            const rect = containerRef.current.getBoundingClientRect();
+            setMousePos({
+              x: e.clientX - rect.left,
+              y: e.clientY - rect.top,
+            });
+          }
+          ticking = false;
         });
+        ticking = true;
       }
     };
 
@@ -85,21 +160,11 @@ export default function Hero() {
         }} 
       />
 
-      {/* 3. Binary Pattern Background */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none overflow-hidden select-none">
-        <div className="flex flex-wrap break-all text-[10px] font-mono leading-none text-black dark:text-white">
-          {Array.from({ length: 4000 }).map((_, i) => (
-             <span key={i}>{Math.random() > 0.5 ? '1' : '0'}</span>
-          ))}
-        </div>
-      </div>
-
-      {/* 1. 12x12 Grid Layout Overlay (Visual Guide - subtle) */}
-      <div className="absolute inset-0 grid grid-cols-12 pointer-events-none z-0 opacity-[0.03] border-gray-500">
-         {Array.from({ length: 12 }).map((_, i) => (
-           <div key={i} className="border-r border-gray-500 h-full"></div>
-         ))}
-      </div>
+      {/* 3. Binary Pattern Background (Canvas) */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 z-0 opacity-[0.1] dark:opacity-[0.15] pointer-events-none"
+      />
 
 
       {/* Main Content Layer */}
@@ -112,7 +177,7 @@ export default function Hero() {
              <span>TOKYO, JP</span>
           </div>
           <nav className="hidden md:flex gap-8">
-            {['WORK', 'ABOUT', 'CONTACT'].map((item) => (
+            {['WORK', 'ABOUT', 'BLOG', 'CONTACT'].map((item) => (
               <Link 
                 key={item} 
                 href={item === "CONTACT" ? "mailto:your-email@example.com" : `/${item === "WORK" ? "works" : item.toLowerCase()}`} 
@@ -125,7 +190,7 @@ export default function Hero() {
           </nav>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            <span>AVAILABLE FOR WORK</span>
+            <span>制作依頼 受付中</span>
           </div>
         </header>
 
@@ -153,7 +218,7 @@ export default function Hero() {
              >
                <Social.icon className="w-5 h-5" />
                <span className="absolute right-12 top-1/2 -translate-y-1/2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                 Visit Profile
+                 プロフィールを見る
                </span>
              </a>
            ))}
@@ -172,7 +237,7 @@ export default function Hero() {
           {/* 3D Typography */}
           <div 
             className="perspective-container transition-transform duration-100 ease-out"
-            style={calculateParallax(0.5)}
+            style={mounted ? calculateParallax(0.5) : {}}
           >
             <h1 className="flex flex-col font-black leading-[0.85] tracking-tighter select-none">
               <span 
@@ -190,10 +255,10 @@ export default function Hero() {
             </h1>
           </div>
 
-          <p className="mt-8 max-w-lg text-gray-600 dark:text-gray-400 text-sm md:text-base leading-relaxed font-medium">
-            Crafting digital experiences through innovative design and clean code architecture.
+          <p className="mt-8 max-w-2xl text-gray-600 dark:text-gray-400 text-sm md:text-base leading-relaxed font-medium">
+            革新的なデザインとクリーンなコード設計を通じて、心に残るデジタル体験を創り出します。
             <br />
-            Focusing on performance, accessibility and pixel-perfect UIs.
+            パフォーマンス、アクセシビリティ、そして細部までこだわり抜いたUIを追求しています。
           </p>
 
           {/* CTAs */}
@@ -203,7 +268,7 @@ export default function Hero() {
                className="group relative px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-bold text-sm tracking-wider overflow-hidden"
             >
                <span className="relative z-10 flex items-center gap-2">
-                 VIEW WORK <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                 制作実績を見る <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                </span>
                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></div>
             </Link>
@@ -211,7 +276,7 @@ export default function Hero() {
                href="#contact"
                className="px-8 py-4 border border-gray-900 dark:border-gray-100 font-bold text-sm tracking-wider hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
             >
-               GET IN TOUCH
+               お問い合わせ
             </Link>
           </div>
 
@@ -220,9 +285,9 @@ export default function Hero() {
         {/* Bottom Stats */}
         <footer className="grid grid-cols-3 gap-4 md:gap-12 border-t border-gray-200 dark:border-gray-800 pt-8 pb-8 md:pb-0 mt-auto">
           {[
-            { label: "PROJECTS", value: "5+", color: "bg-blue-500" },
-            { label: "YEARS EXP", value: "02", color: "bg-green-500" },
-            { label: "PASSION", value: "∞", color: "bg-purple-500" },
+            { label: "実績数", value: "5+", color: "bg-blue-500", width: "w-3/4" },
+            { label: "経験年数", value: "02", color: "bg-green-500", width: "w-1/2" },
+            { label: "情熱", value: "∞", color: "bg-purple-500", width: "w-full" },
           ].map((stat, i) => (
             <div key={i} className="flex flex-col gap-2">
                <div className="flex justify-between items-end">
@@ -230,7 +295,7 @@ export default function Hero() {
                   <span className="text-[10px] md:text-xs font-mono text-gray-500 tracking-wider mb-1">{stat.label}</span>
                </div>
                <div className="w-full h-1 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                  <div className={`h-full ${stat.color} w-3/4 rounded-full`}></div>
+                  <div className={`h-full ${stat.color} ${stat.width} rounded-full`}></div>
                </div>
             </div>
           ))}

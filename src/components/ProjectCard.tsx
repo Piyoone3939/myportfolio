@@ -25,11 +25,22 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           src={project.thumbnail}
           alt={project.title}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-100"
         />
         {/* Overlay Gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 md:opacity-60 transition-opacity duration-300 md:group-hover:opacity-80"></div>
       </div>
+
+      {project.award && (
+        <div className="absolute top-4 right-4 z-20 max-w-[70%]">
+          <span className="inline-block px-3 py-1 bg-yellow-400/90 backdrop-blur-sm text-black rounded-full shadow-lg border border-yellow-200">
+             <span className="text-[10px] font-bold tracking-tight block truncate">
+                {project.award}
+             </span>
+          </span>
+        </div>
+      )}
 
       {/* Content */}
       <Link href={`/works/${project.id}`} className="absolute inset-0 z-10 flex flex-col justify-end p-6 md:p-8 cursor-pointer">

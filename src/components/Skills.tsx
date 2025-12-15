@@ -13,7 +13,7 @@ export default function Skills() {
            <span className="text-blue-600 font-mono text-sm tracking-widest mb-4 block">EXPERTISE</span>
            <h2 className="text-5xl md:text-6xl font-black tracking-tighter uppercase mb-6">Skills</h2>
            <p className="text-gray-600 dark:text-gray-400 font-light text-lg">
-             My technical toolkit and proficiency levels across different domains.
+             私が習得している技術スタックと、各領域におけるスキルセットです。
            </p>
         </div>
 

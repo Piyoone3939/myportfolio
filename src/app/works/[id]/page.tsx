@@ -30,7 +30,7 @@ export default function ProjectDetailPage() {
           href="/works" 
           className="flex items-center gap-2 text-sm font-bold tracking-widest hover:text-blue-500 transition-colors"
         >
-          <ArrowLeft className="w-4 h-4" /> BACK TO WORKS
+          <ArrowLeft className="w-4 h-4" /> 作品一覧に戻る
         </Link>
       </nav>
 
@@ -42,7 +42,14 @@ export default function ProjectDetailPage() {
            className="max-w-4xl mx-auto"
         >
           <div className="mb-8">
-             <span className="text-blue-500 text-sm font-mono tracking-widest">PROJECT 0{project.id}</span>
+             <div className="flex items-center justify-between gap-4 mb-2">
+                <span className="text-blue-500 text-sm font-mono tracking-widest">PROJECT 0{project.id}</span>
+                {project.award && (
+                   <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-xs font-bold border border-yellow-200 dark:border-yellow-700">
+                      {project.award}
+                   </span>
+                )}
+             </div>
              <h1 className="text-5xl md:text-7xl font-black tracking-tighter mt-2 mb-6 text-black dark:text-white">
                 {project.title}
              </h1>
@@ -64,46 +71,39 @@ export default function ProjectDetailPage() {
 
           <div className="grid md:grid-cols-3 gap-12">
              <div className="md:col-span-2">
-                <h3 className="text-xl font-bold mb-4">Overview</h3>
+                <h3 className="text-xl font-bold mb-4">プロジェクト概要</h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
                     {project.description}
                 </p>
-                <p className="mt-4 text-gray-600 dark:text-gray-300 leading-relaxed">
-                    Here you can add more detailed description about the project challenge, solution, and impact. 
-                    This section is great for storytelling about your development process.
-                </p>
+                {project.story && (
+                    <p className="mt-6 text-sm text-gray-500 dark:text-gray-400 leading-relaxed italic border-l-2 border-gray-200 dark:border-gray-800 pl-4">
+                        {project.story}
+                    </p>
+                )}
              </div>
              
              <div className="space-y-6">
                 <div>
-                   <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">Links</h3>
+                   <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">関連リンク</h3>
                    <div className="flex flex-col gap-3">
                       <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-medium hover:text-blue-500 transition-colors">
-                         <Github className="w-4 h-4" /> Source Code
+                         <Github className="w-4 h-4" /> ソースコード
                       </a>
                       <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-medium hover:text-blue-500 transition-colors">
-                         <ExternalLink className="w-4 h-4" /> Live Demo
+                         <ExternalLink className="w-4 h-4" /> デモサイトを見る
                       </a>
                    </div>
                 </div>
                 
                 <div>
-                    <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">Date</h3>
-                    <p>2024</p>
+                    <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">開発時期</h3>
+                    <p>{project.period || "2024"}</p>
                 </div>
              </div>
           </div>
 
         </motion.div>
       </SectionContainer>
-       
-       {/* Next Project Link (Mock) */}
-       <div className="border-t border-gray-200 dark:border-gray-800 py-12 text-center">
-            <p className="text-xs text-gray-400 mb-2 font-mono">NEXT PROJECT</p>
-            <Link href="/works" className="text-3xl font-bold hover:text-blue-500 transition-colors">
-                View All Works
-            </Link>
-       </div>
     </div>
   );
 }

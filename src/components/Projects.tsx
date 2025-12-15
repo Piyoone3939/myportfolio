@@ -17,7 +17,7 @@ export default function Projects() {
             <span className="absolute -bottom-4 left-0 w-1/3 h-2 bg-blue-600"></span>
           </h2>
           <p className="mt-8 text-xl text-gray-600 dark:text-gray-400 max-w-2xl font-light">
-            A collection of projects showcasing my journey in software engineering and interfaces.
+            ソフトウェアエンジニアリングとUIデザインの探求の中で制作してきた、これまでのプロジェクト実績です。
           </p>
         </div>
 
@@ -32,7 +32,7 @@ export default function Projects() {
               href="/works" 
               className="inline-flex items-center gap-2 px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-bold text-sm tracking-widest hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
             >
-                VIEW ALL WORKS <ArrowRight className="w-4 h-4" />
+                すべての作品を見る <ArrowRight className="w-4 h-4" />
             </Link>
         </div>
       </div>
