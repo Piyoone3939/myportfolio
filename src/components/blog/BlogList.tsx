@@ -52,6 +52,21 @@ export default function BlogList({ blogPosts }: BlogListProps) {
               viewport={{ once: true }}
               className="group relative flex flex-col h-full bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 overflow-hidden hover:border-blue-500/50 transition-colors"
             >
+              {/* Thumbnail Image */}
+              <div className="relative w-full aspect-video bg-gray-200 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-800">
+                {post.coverImage ? (
+                  <img
+                    src={post.coverImage}
+                    alt={post.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center w-full h-full text-gray-400">
+                    <span className="text-xs font-mono">No Image</span>
+                  </div>
+                )}
+              </div>
+
               <div className="flex-1 flex flex-col p-8">
                 <div className="flex items-center gap-2 text-xs font-mono text-gray-500 mb-4">
                   <Calendar className="w-3 h-3" />
@@ -67,7 +82,7 @@ export default function BlogList({ blogPosts }: BlogListProps) {
                 </p>
 
                 <div className="flex flex-wrap gap-2 mt-auto">
-                   {post.tags.map(tag => (
+                   {post.tags?.map(tag => (
                      <span key={tag} className="flex items-center gap-1 text-[10px] font-mono px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded text-gray-600 dark:text-gray-300">
                         <Tag className="w-3 h-3" /> {tag}
                      </span>
