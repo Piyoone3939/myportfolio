@@ -174,7 +174,7 @@ export default function Hero() {
         <header className="flex justify-between items-start mb-8 text-xs font-mono tracking-widest text-gray-500 dark:text-gray-400">
           <div className="flex flex-col gap-1">
              <span className="text-xl font-bold text-black dark:text-white">{currentTime}</span>
-             <span>TOKYO, JP</span>
+             <span>Aichi, JP</span>
           </div>
           <nav className="hidden md:flex gap-8">
             {['WORK', 'ABOUT', 'BLOG', 'CONTACT'].map((item) => (

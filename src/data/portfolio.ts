@@ -32,10 +32,10 @@ export interface Project {
 export const profile: Profile = {
   name: "PIYOONE",
   role: "Student Engineer",
-  location: "TOKYO, JP",
-  introduction: "情報科学を専攻する学生エンジニア。Web開発とUI/UXデザインに情熱を注いでいます。美しく、効率的で、保守性の高いコードを書くことを大切にしています。",
+  location: "Aichi, JP",
+  introduction: "情報工学を専攻する学生エンジニア。Web開発とUI/UXデザインに情熱を注いでいます。美しく、効率的で、保守性の高いコードを書くことを大切にしています。",
   contact: {
-    email: "contact@example.com", // Keeping placeholder or ask user? keeping as is for now unless specified
+    email: "m.sota.engineer@gmail.com", // Keeping placeholder or ask user? keeping as is for now unless specified
     github: "https://github.com/Piyoone3939",
     twitter: "https://x.com/piyoone3939",
   },
